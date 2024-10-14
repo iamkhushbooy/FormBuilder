@@ -54,12 +54,14 @@ const page = () => {
     }
   }, [])
   const saveDBandMail = async () => {
-    const res = await axios.post('api/save', {
-      field,email
-    })
-    alert('link generated')
-
-    // console.log(res.data);
+    try {
+      const res = await axios.post('api/save', {
+        field,email
+      })
+      alert('link generated')
+    } catch (error) {
+      alert('error occured')
+    }
   }
   return (
     <>
