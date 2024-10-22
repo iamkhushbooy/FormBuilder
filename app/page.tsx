@@ -11,7 +11,7 @@ export type fieldType = {
 const page = () => {
   const [field, setField] = useState<fieldType[]>([]);
   const [isSaving, setIsSaving] = useState(true);
-  const [email,setEmail]=useState('')
+  const [email, setEmail] = useState('')
   // useEffect(() => {
   //   console.log(field);
   // }, [field])
@@ -56,7 +56,7 @@ const page = () => {
   const saveDBandMail = async () => {
     try {
       const res = await axios.post('api/save', {
-        field,email
+        field, email
       })
       alert('link generated')
     } catch (error) {
@@ -65,81 +65,81 @@ const page = () => {
   }
   return (
     <>
-    <Header></Header>
-    <div className='w-full h-[90vh] flex justify-center
+      <Header></Header>
+      <div className='w-full h-[90vh] flex justify-center
     items-center flex-col
    '>
-      <div id='main' className='w-[90%] h-[80%] 
+        <div id='main' className='w-[90%] h-[80%] 
         overflow-scroll overflow-x-hidden bg-gray-100 border rounded'>
-        <div className="sticky top-0 bg-gray-100">
-          <h1 className='font-bold text-[25px] mx-4 sticky top-4'>
-            Start Here...</h1>
-          <button onClick={addField} className='text-[18px] mx-4 
+          <div className="sticky top-0 bg-gray-100">
+            <h1 className='font-bold text-[25px] mx-4 sticky top-4'>
+              Start Here...</h1>
+            <button onClick={addField} className='text-[18px] mx-4 
                     mt-8
                    bg-blue-400 hover:bg-blue-500 text-white font-semibold 
                      py-2 px-4 rounded-full'>
-            Add New Field
-          </button>
-        </div>
-        {field.map((item, index) => (
-          <div key={item.id} className='mx-[10%] my-4 w-[80%] h-auto bg-gray-200 border 
+              Add New Field
+            </button>
+          </div>
+          {field.map((item, index) => (
+            <div key={item.id} className='mx-[10%] my-4 w-[80%] h-auto bg-gray-200 border 
             rounded flex-col'>
-            <input
-              value={item.label}
-              onChange={e => changeLabel(item.id, e.target.value)}
-              className='mx-[15%] mt-4 w-[70%] h-[40px] rounded-md border
+              <input
+                value={item.label}
+                onChange={e => changeLabel(item.id, e.target.value)}
+                className='mx-[15%] mt-4 w-[70%] h-[40px] rounded-md border
              border-gray-300 bg-blue-50 p-2 focus:ring-2 
              focus:ring-blue-100 focus:border-blue-100 focus:outline-none
               transition duration-200 ease-in-out'
-              type='text' placeholder={item.label} />
-            <select
-              className='mx-[15%] mt-4 w-[70%] h-[40px] rounded border p-2'
-              value={item.type}
-              onChange={e => changeType(item.id, e.target.value as fieldType['type'])}
-            >
-              <option value="text">Text</option>
-              <option value="number">Number</option>
-              <option value="email">Email</option>
-              <option value="password">Password</option>
-            </select>
-            <button
-              onClick={() => removeField(item.id)}
-              className='w-[70%] h-[40px] text-[18px] mx-[15%] mt-4 mb-4
+                type='text' placeholder={item.label} />
+              <select
+                className='mx-[15%] mt-4 w-[70%] h-[40px] rounded border p-2'
+                value={item.type}
+                onChange={e => changeType(item.id, e.target.value as fieldType['type'])}
+              >
+                <option value="text">Text</option>
+                <option value="number">Number</option>
+                <option value="email">Email</option>
+                <option value="password">Password</option>
+              </select>
+              <button
+                onClick={() => removeField(item.id)}
+                className='w-[70%] h-[40px] text-[18px] mx-[15%] mt-4 mb-4
                          bg-red-400 hover:bg-red-500 text-white font-semibold rounded-full'>
-              Remove Field
-            </button>
-          </div>
-        ))}
+                Remove Field
+              </button>
+            </div>
+          ))}
 
-      </div>
-      {
-        isSaving?
-        <button onClick={save}
-          className='w-[150px] h-[40px] mx-3 text-[18px] bg-green-500
+        </div>
+        {
+          isSaving ?
+            <button onClick={save}
+              className='w-[150px] h-[40px] mx-3 text-[18px] bg-green-500
              hover:bg-green-600
              text-white font-semibold rounded'>Save
-        </button>
-        :
-        <div className='flex justify-center items-center w-[80%] h-[100px]'>
-           <input 
-           value={email}
-           onChange={e=>setEmail(e.target.value)}
-           type="text" placeholder='Enter your email...'
-            className='mx-[2px] w-[220px] h-[40px] rounded-md border
+            </button>
+            :
+            <div className='flex justify-center items-center w-[80%] h-[100px]'>
+              <input
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                type="text" placeholder='Enter your email...'
+                className='mx-[2px] w-[220px] h-[40px] rounded-md border
             border-gray-300 bg-blue-50 p-2 focus:ring-2 
             focus:ring-blue-100 focus:border-blue-100 focus:outline-none
              transition duration-200 ease-in-out'
-           />
-        <button onClick={saveDBandMail}
-        className='w-[140px] h-[50px] mx-3 text-[18px] bg-green-500
+              />
+              <button onClick={saveDBandMail}
+                className='w-[140px] h-[50px] mx-3 text-[18px] bg-green-500
              hover:bg-green-600
              text-white font-semibold rounded'>Generate mail link
-      </button>
-        </div>
-       
-      }
-    </div>
-    <Footer></Footer>
+              </button>
+            </div>
+
+        }
+      </div>
+      <Footer></Footer>
     </>
   )
 }
